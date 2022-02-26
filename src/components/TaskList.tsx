@@ -13,11 +13,10 @@ interface Task {
 export function TaskList() {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [newTaskTitle, setNewTaskTitle] = useState('');
-  console.log("tasks",tasks)
 
   function handleCreateNewTask() {
     if(newTaskTitle == '') {
-        return (window.alert("Favor digitar um nome para a Task."))
+        return (window.alert("Please type in a name for your task."))
     } else {
       const NewTask = {
         id: Math.random(),
@@ -26,12 +25,11 @@ export function TaskList() {
       }
       setTasks(pastState => [...pastState, NewTask])
       setNewTaskTitle('')
-
     }
   }
 
-  function handleToggleTaskCompletion(id: number) {
-    const CompletedTask = tasks.map(task => task.id === id ? {
+  function handleToggleTaskCompletion(toggledTaskId: number) {
+    const CompletedTask = tasks.map(task => task.id === toggledTaskId ? {
       ...task, isComplete: !task.isComplete
     } : task)
     setTasks(CompletedTask)
@@ -46,7 +44,7 @@ export function TaskList() {
   return (
     <section className="task-list container">
       <header>
-        <h2>Tasks</h2>
+        <h2>My Tasks</h2>
 
         <div className="input-group">
           <input 
